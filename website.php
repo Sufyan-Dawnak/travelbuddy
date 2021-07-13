@@ -1,468 +1,738 @@
-<!DOCTYPE html>
 <?php
 error_reporting(0)
 ?>
-<head>
-<style>
-    
-
-    .container 
-    {
-        width:100%;
-        margin: 0%;
-        padding: 0%;
-        height: 5vw;
-        overflow: hidden;
-        z-index: 1;
-        background-color:black;
-        box-sizing: border-box;
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+    * {
+      box-sizing: border-box;
     }
 
-    .container a
-    {
-        font-size: 1.9vw;
-        float: right;
-        display: block;
-        color: white;
-        font-family:"Agency FB";
-        text-align: center;
-        padding: 1vw 2vw;
-        text-decoration: none;
-        cursor: pointer;
+    /*TO STYLE THE BODY*/
+    body {
+      font-family: Arial;
+      margin: 0;
+      background-image:linear-gradient(to right,rgb(46, 175, 169),rgb(20, 80, 160));
+      background-attachment: fixed;
+      background-repeat: no-repeat;
     }
 
-    .container a:hover
-    {
-        color:rgb(252, 115, 35);
-    }
 
-    .p1
-    {
-        font-size: 1.5vw;
-        float: left;
-        display: block;
-        color: white;
-        font-family:"Agency FB";
-        text-align: center;
-        padding: 0.3vw 1vw;
-        text-decoration: none;
-    }
-
-    .navbar
-    {
-        width: 100%;
-        height: 8vw;
-        overflow: hidden;
-        background-color: whitesmoke;
-    }
-
-    .navbar a
-    {
-        position:sticky;
-        font-size: 2vw;
-        float: right;
-        display: block;
-        color: #6C717A;
-        font-family:"Agency FB";
-        text-align: center;
-        padding: 2.7vw 2vw;
-        text-decoration: none;
-    }
-
-    .navbar a:hover
-    {
-        color:rgb(245, 185, 73);
-    }
-
-    .navbar .a1
-    {
-        float: left;
-        display: block;
-    }
-
-    .show
-    {
-        display: block;
-        background-color: cyan;
-        width: 100%;
-        height: 30vw;
+    /* Style the top navigation bar */
+    .navbar {
+      overflow: hidden;
+      background-color: white;
+      z-index: 1;
     }
 
     .navimage
     {
-        position:absolute;
-        text-align: left;
-        width:19vw; 
-        height:8vw;
+      width: 40px;
+      height: 40px;
+      border-radius:50%;
     }
 
-    .slideshow-container 
-    {
-    width: 100%;
-    height: 40vw;
-    position: relative;
-    margin: auto;
+    .navbar-right {
+      float: right;
     }
 
-    .slideshow-container .header
-    {
-        position:absolute;
-        text-align:center;
-        z-index: 1;
-        font-size: 5vw;
-        font-family:"Forte";
-        top: 5vw;
-        color: whitesmoke;
-        left: 5%;
+    /* Style the topnav links */
+    .navbar a {
+      font-size: 31px;
+      float: left;
+      display: block;
+      color: black;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
     }
 
-    .slideshow-container .header1
+    .dropdown
     {
-        position:absolute;
-        text-align:center;
-        z-index: 1;
-        font-size: 5vw;
-        font-family:"Haettenschweiler";
-        top: 26vw;
-        color: whitesmoke;
-        left: 31%;
+      float:left;
+      overflow: hidden;
     }
 
-    .slideshow-container button
+    .dropdown .dropbutton
     {
-        background-color: orange;
-        text-align: center;
-        font-family:"Agency FB";
-        font-size: 2.3vw;
-        width: 20vw;
-        height: 5vw;
-        position: absolute;
-        top:33vw;
-        left: 40%;
-        z-index: 1;
-        cursor:pointer;
-        border: none;
+      font-size: 31px;  
+      border: none;
+      outline: none;
+      color: black;
+      padding: 14px 16px;
+      background-color: inherit;
+      font-family: inherit;
+      margin: 0;
+      overflow: hidden;
     }
 
-    .slideshow-container button:hover
-    {
-        background-color: rgb(39, 163, 240);
-        color: whitesmoke;
+    @media screen and (max-width:800px) {
+
+      .navbar a{
+        font-size: 20px;
+      }
+
+      .dropdown .dropbutton{
+        font-size: 20px;
+      }
+
     }
 
-    /* Fading animation */
-    .fade {
-    -webkit-animation-name: fade;
-    -webkit-animation-duration: 1.5s;
-    animation-name: fade;
-    animation-duration: 1.5s;
+
+    /* Change color on hover */
+    .navbar a:hover ,.dropdown:hover .dropbutton{
+      background-color: #ddd;
+      color: black;
     }
 
-    @-webkit-keyframes fade {
-    from {opacity: .4} 
-    to {opacity: 1}
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: white;
+      min-width: 150px;
+      box-shadow: 0px 16px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
     }
 
-    @keyframes fade {
-    from {opacity: .4} 
-    to {opacity: 1}
-    }
-    
-    .card1
-    {
-        width: 100%;
-        height: 77vw;
-        background-color:whitesmoke;
-        position: relative;
+    .dropdown-content a {
+      float: none;
+      color:black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+      text-align: left;
     }
 
-    .card1 .header
-    {
-        position: absolute;
-        text-align: center;
-        top: 3vw;
-        left: 43%;
-        font-family: "forte";
-        font-size: 2vw;
+    .dropdown-content a:hover {
+      background-color: #ddd;
     }
 
-    .card1 .header1
-    {
-        position: absolute;
-        text-align: center;
-        top: 7vw;
-        left: 35%;
-        font-family: "Haettenschweiler";
-        font-size: 4vw;
-    }
-    
-    .column {
-    position: relative;
-    float: left;
-    top: 13vw;
-    width: 31%;
-    height: 27vw;
-    margin-left: 1vw;
-    margin-right: 1vw;
-    margin-top: 2vw;
-    background-color: rgb(75, 74, 74);
-    z-index: 1; 
+    .dropdown:hover .dropdown-content {
+      display: block;
     }
 
-    .column img
-    {
-        width: 100%;
-        height: 100%;
-        color: white;
+    /* For Row */
+
+    .row{
+      display: grid;
+      grid-template-columns: 3fr 1fr;
+      column-gap: 20px;
+      padding: 20px;
     }
 
-    .column img .alt
-    {
-        color: white;
+    /* TO MAKE LEFT COLUMN */
+    .leftcolumn {
+      display: block;
     }
 
-    .column:hover img
-    {
-        opacity:0.5;
+    /* TO MAKE RIGHT COLUMN */
+    .rightcolumn {
+      background-color: inherit;
     }
 
-    .column .name
-    {
-        position: absolute;
-        top: 2vw;
-        left: 10%;
-        font-size: 3.7vw;
-        color: cornsilk;
-        font-family: "Brush Script Mt";
+
+    /* ADDING CARD TO THE PAGE */
+    .card1{
+      display: block;
+      background-color:inherit;
+      margin-top: 20px;
+      height:41vw;
+      width: 75vw;
     }
 
-    .column .detail
-    {
-        width: 90%;
-        position: absolute;
-        top: 16vw;
-        left: 55%;
-        font-family: "Agency FB";
-        font-size: 1.9vw;
-        color: cornsilk;
-        opacity: 0;
-        transition: .5s ease;
-        transform: translate(-50%, -50%);
-        -ms-transform: translate(-50%, -50%);
+    .card {
+      border-radius: 5%;
+      background-color: white;
+      z-index: 1;
+      padding: 20px;
+      margin-top: 20px;
+      color: black;
     }
 
-    .column:hover .detail
+    .cimage
     {
-        opacity: 1;
+      border: 3px solid black;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      width: 30%;
     }
 
-    .card1 .more
+    .cimage2
     {
-        z-index: 1;
-        font-size: 2.3vw;
-        font-family: "Agency FB";
-        background-color: inherit ;
-        position: relative;
-        border: none;
-        width: 17.9vw;
-        height: 2.7vw;
-        top: 15vw;
-        padding: 1vw;
-        left: 40%;
-        cursor: pointer;
-        text-decoration: none;
-        color: black;
-    }
-    .more .dots
-    {
-        position:absolute;
-        top: 2.1vw;
-        left: 19.9vw;
-        transition: .5s ease;
-        transform: translate(-50%, -50%);
-        -ms-transform: translate(-50%, -50%);
-        opacity: 0;
-    }
-    .more:hover
-    {
-        width:21vw ;
-        color: rgb(48, 118, 223);
-    }
-
-    .more:hover .dots
-    {
-        opacity: 1;
+      border: 3px solid black;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      width: 100%;      
     }
 
     .row:after {
-    content: "";
-    display: table;
-    clear: both;
-    }
-    
-    .card2
-    {
-        width: 100%;
-        height: 57vw;
-        background-color:rgb(196, 193, 193);
-        position: relative;
+      content: "";
+      display: table;
+      clear: both;
     }
 
+    @media screen and (max-width:800px){
 
-
-</style>  
-</head>
-<body>
-    <title>Travel Buddy</title>
-    <div class="container">
-        <p class="p1">9998887723</p>
-        <p class="p1">.</p>
-        <p class="p1">travelbuddy@gmail.com</p>
-        <p class="p1">.</p>
-        <p class="p1">Mumbai, India</p>
-        <a>Sign Up</a>
-        <a>Login</a>
-    </div>
-    <div class="navbar">
-        <div class="a1"><image src="Images/travellogo.png"  class="navimage" alt="Website Logo"></image></div>
-        <a href="#">CONTACT US</a>
-        <a href="#">DASHBOARD</a>
-        <a href="#">HOME</a>
-    </div>
-    
-    
-    <div class="slideshow-container">
-        <div class="header">Travel to your favourite Destinations with <br> Travel Buddy</div>
-        <div class="header1">Plan Your First Trip Now</div>
-        <button>Create a Tour Plan</button>
-        <div class="mySlides fade" >
-          <img src="Images/Slideshow/travel1.jpg"style=" width:100% ;height: 40vw" alt="Slideshow image1">
-        </div>
-        
-        <div class="mySlides fade">
-          <img src="Images/Slideshow/travel2.jpg" style=" width:100% ;height: 40vw" alt="Slideshow image2">
-        </div>
-        
-        <div class="mySlides fade">
-          <img src="Images/Slideshow/travel3.jpg" style=" width:100% ;height: 40vw" alt="Slideshow image3">
-        </div>
-        
-        <div class="mySlides fade">
-            <img src="Images/Slideshow/travel4.jpg" style=" width:100% ;height: 40vw" alt="Slideshow image4">
-        </div>
-        
-        <div class="mySlides fade">
-            <img src="Images/Slideshow/travel5.jpg" style=" width:100% ;height: 40vw" alt="Slideshow image5">
-        </div>
-
-    </div>
-    
-    <div class="card1">
-        <div class="header">Around the world</div>
-        <div class="header1">Top Destinations to visit</div>
-        
-        <div class="row">
-        
-        <div class="column">
-        <a href="#"><img src="Images/Places/paris.jpg" alt="Image of the city Paris ">
-        <div class="name">Paris,France</div>
-        <div class="detail">1.Start the day on the Champs-Élysées
-        <br>2.Go to the top of the Eiffel Tower
-        <br>3.Must-See: Louvre museum
-        <br>4.Must-See: Notre Dame Cathedral
-        <br>5.Have fun at Disneyland Paris
-        <br><br>Click for more details...
-        </div>
-        </a>
-        </div>
-
-        <div class="column">
-            <a href="#"><img src="Images/Places/toronto.jpg" alt="Image of the city Toronto ">
-            <div class="name">Toronto,Canada</div>
-            <div class="detail">1.See the View from the CN Tower
-            <br>2.Visit the Royal Ontario Museum (ROM)
-            <br>3.Ripley's Aquarium of Canada
-            <br>4.Art Gallery of Ontario (AGO)
-            <br>5.Day Trip to Niagara Falls
-            <br><br>Click for more details...
-            </div>
-            </a>
-        </div>
-
-        <div class="column">
-            <a href="#"><img src="Images/Places/losangeles.jpg" alt="Image of the city Los Angeles ">
-            <div class="name">Los Angeles,USA</div>
-            <div class="detail">1.See the View from the CN Tower
-            <br>2.Visit the Royal Ontario Museum (ROM)
-            <br>3.Ripley's Aquarium of Canada
-            <br>4.Art Gallery of Ontario (AGO)
-            <br>5.Day Trip to Niagara Falls
-            <br><br>Click for more details...
-            </div>
-            </a>
-        </div>
-
-        <div class="column">
-            <a href="#"><img src="Images/Places/mumbai.jpg" alt="Image of the city Mumbai ">
-            <div class="name">Mumbai,India</div>
-            <div class="detail">1.Gateway of India
-            <br>2.Sanjay Gandhi National Park
-            <br>3.Red Carpet Wax Museum
-            <br>4.Haji Ali Dargah
-            <br>5.Marine Drive
-            <br><br>Click for more details...
-            </div>
-            </a>
-        </div>
-
-        <div class="column">
-            <a href="#"><img src="Images/Places/tokyo.jpg" alt="Image of the city Tokyo ">
-            <div class="name">Tokyo,Japan</div>
-            <div class="detail">1.Tour to The Imperial Palace
-            <br>2.Visit the Sensō-ji Temple
-            <br>3.Enjoy Nature at Ueno Park and Ueno Zoo
-            <br>4.Wander through the Tokyo National Museum
-            <br>5.See the View from the Tokyo Skytree
-            <br><br>Click for more details...
-            </div>
-            </a>
-        </div>
-
-        <div class="column">
-            <a href="#"><img src="Images/Places/melbourne.jpg" alt="Image of the city Melbourne ">
-            <div class="name">Melbourne,Australia</div>
-            <div class="detail">1.Federation Square
-            <br>2.Royal Botanic Gardens
-            <br>3.Parliament House
-            <br>4.Eureka Tower
-            <br>5.Queen Victoria Market
-            <br><br>Click for more details...
-            </div>
-            </a>
-        </div>
-    </div>
-    <div ><a href="#" class="more">Check more destinations <div class="dots">...</div></a></div>
-    </div>   
-    
-    <div class="card2"></div>
-    <div class="show"></div>
-    <div class="show"></div>
-</body>
-
-<script>
-    var slideIndex = 0;
-    showSlides();
-    
-    function showSlides() {
-      var i;
-      var slides = document.getElementsByClassName("mySlides");
-      for (i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";  
+      .row{
+        grid-template-columns: 100%;
       }
-      slideIndex++;
-      if (slideIndex > slides.length) {slideIndex = 1}    
-      slides[slideIndex-1].style.display = "block";  
-      setTimeout(showSlides, 10000); // Change image every 2 seconds
+
+      .card1{
+        width: 100%;
+        height: 41vw;
+      }
     }
-    </script>
+
+    /* FOOTER STYLE */
+    .footer {
+      background-color: white;
+      padding: 20px;
+      text-align: center;
+      color: black;
+      margin-top: 20px;
+    }
+
+    .footer-title{
+      padding: 20px;
+    }
+
+    .footer-grid{
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+    }
+
+    .member-box{
+      text-align: center;
+    }
+
+    .member-box img{
+      max-width: 200px;
+      width: 70%;
+      border-radius:50%;
+    }
+
+    .member-box .txt{
+      font-size: 24;
+      font-weight: bold;
+    }
+
+
+    .cf3 {
+      position:relative;
+      height:100%;
+      width:100%;
+      text-align: center;
+      justify-content: center;      
+    }
+
+    .cf3 img {
+      max-width: 100%;
+      max-height: 100%;
+      display: block;
+      width: 90%;
+      border-radius: 5%;
+      position:absolute;
+      -webkit-transition: opacity 1s ease-in-out;
+      -moz-transition: opacity 1s ease-in-out;
+      -o-transition: opacity 1s ease-in-out;
+      transition: opacity 1s ease-in-out;
+    }
+
+    @keyframes cf3FadeInOut {
+      0% {
+      opacity:1;
+    }
+    45% {
+    opacity:1;
+    }
+    55% {
+    opacity:0;
+    }
+    100% {
+    opacity:0;
+    }
+    }
+
+    .cf3 img.top {
+      width: 95%;
+      left: 2.5%;
+      animation-name: cf3FadeInOut;
+      animation-timing-function: ease-in-out;
+      animation-iteration-count: infinite;
+      animation-duration: 10s;
+      animation-direction: alternate;
+    }
+
+    .cf3 img.bottom{
+      left:5%;
+    }
+
+    .button{
+      color:black;
+      background-color: white;
+    text-decoration: none;
+    padding: 5px;
+    }
+
+    .button:hover
+    {
+      color:blue;
+      background-color: white;
+      padding: 5px;
+
+    }
+
+    .button1{
+      border-radius: 5%;
+      font-size: 21px;
+    color:black;
+    background-color: transparent;
+    text-decoration: none;
+    padding-right: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    }
+
+    .button1:hover
+    {
+      color:black;
+      background-color: rgb(214, 209, 209);
+      padding-right: 15px;
+      padding-top: 5px;
+      padding-bottom: 5px;
+      padding-left: 5px;
+      
+    }
+
+    /* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
+    @media screen and (max-width: 800px) {
+      .leftcolumn, .rightcolumn {   
+        width: 100%;
+        padding: 0;
+      }
+    }
+
+    /* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
+    @media screen and (max-width: 400px) {
+      .topnav a {
+        float: none;
+        width: 100%;
+      }
+    }
+
+    /* MODAL STYLING START */
+
+    /* Input field styling*/
+    input[type=text]{
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    input[type=password]{
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    /*Cancel button style*/
+    .cancelbtn {
+      font-size: 23;
+      width: auto;
+      padding: 10px 18px;
+      background-color: #f44336;
+    }
+
+    /* Center's the image container*/
+    .imgcontainer {
+      text-align: center;
+      margin: 24px 0 12px 0;
+      block-size: 350px;
+    }
+
+    /*Image styling and positioning*/
+    img.avatar1 {
+      padding-top: 260px;
+      padding: 20px;
+      text-align: center;
+      width: 250px;
+      height: 250px;
+      border-radius: 50%;
+
+    }
+
+    img.avatar2 {
+      padding:20px;
+      text-align: center;
+      width: 250px;
+      height: 250px;
+      border-radius: 50%;
+
+    }
+
+    img.avatar3 {
+      padding: 20px;
+    text-align: right;
+      width: 250px;
+      height: 250px;
+      border-radius: 50%;
+
+    }
+
+    img.avatar4 {
+      width: 30%;
+      height:100%;
+      border-radius: 50%;
+    }
+
+
+    /*Container padding */
+    .container {
+      padding: 16px;
+    }
+
+    .container2 {
+      padding: 16px;
+      background-color: white;
+    }
+
+
+    /* Background of the modal*/
+    .modal1 {
+      display: none; /*Hidden by default*/
+      position: absolute; 
+      z-index: 1; /*Displays on the top of the screen*/
+      left: 0;
+      top: 0;
+      width: 100%; 
+      height: 100%; 
+      overflow: auto; /* Enable scroll if needed*/
+      background-color: rgba(0,0,0,0.4); /*Gives background opacity with black colour*/
+      padding-top: 60px;
+    }
+
+    /* Modal content box*/
+    .modal1-content {
+      background-color: white;
+      margin: 5% auto 15% auto; 
+      border: 1px solid #888; 
+      color: white;
+      width: 80%;
+      height: 80%;
+    }
+    .modal1 .modal1-dailog
+    {
+      position:absolute;
+      left:200px;
+      width: 1250px;
+      height: 500px;
+    }
+
+    /*Modal text sytling*/
+    .mtxt
+    {
+      text-align: center;
+      color: black;
+    }
+
+
+    /* Close button Style (x) */
+    .close {
+      position: absolute;
+      right: 140px;
+      top: 70px;
+      color:black;
+      font-size: 35px;
+      font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: red;
+      cursor: pointer;
+    }
+
+    /*Button styling*/
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    button:hover {
+      opacity: 0.8;
+    }
+
+    /*Cancel button style */
+    .cancelbtn {
+      width: auto;
+      padding: 10px 18px;
+      background-color: #f44336;
+    }
+
+
+    span.psw{
+      color: black;
+      float: right;
+      padding-top: 16px;
+    }
+
+    span.psw a{
+      color:black;
+      float: right;
+      padding-left: 5px;
+    }
+
+    /* Refer the previous modal to understand the functioning of these classes*/
+    .modal2 {
+      display: none; 
+      position: fixed; 
+      z-index: 1; 
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%; 
+      overflow: auto; 
+      background-color: rgba(0,0,0,0.4);
+      padding-top: 60px;
+    }
+
+
+    .modal2-content {
+      background-color: white;
+      margin: 5% auto 15% auto; 
+      border: 1px solid #888;
+      width: 80%;
+    }
+
+    .close2 {
+      position:absolute;
+      right: 175px;
+      top: 140px;
+      color: black;
+      font-size: 35px;
+      font-weight: bold;
+    }
+
+    .close2:hover,
+    .close2:focus {
+      color: red;
+      cursor: pointer;
+    }
+
+
+    .modal3 { 
+      display: none;
+      position: fixed; 
+      z-index: 1; 
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%; 
+      overflow: auto; 
+      background-color: rgba(0,0,0,0.4); 
+      padding-top: 60px;
+    }
+
+
+    .modal3-content {
+      background-color: white;
+      margin: 5% auto 15% auto; 
+      border: 1px solid #888;
+      width: 80%; 
+    }
+
+    .modal4 {
+      display: none; 
+      position: fixed; 
+      z-index: 1; 
+      left: 0;
+      top: 0;
+      width: 100%; 
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.4); 
+      padding-top: 60px;
+    }
+
+
+    .modal4-content {
+      background-color: white;
+      margin: 5% auto 15% auto;
+      border: 1px solid #888;
+      width: 80%; 
+    }
+
+    /* Add Zoom Animation */
+    .animate {
+      -webkit-animation: animatezoom 0.6s;
+      animation: animatezoom 0.6s
+    }
+
+    @-webkit-keyframes animatezoom {
+      from {-webkit-transform: scale(0)} 
+      to {-webkit-transform: scale(1)}
+    }
+      
+    @keyframes animatezoom {
+      from {transform: scale(0)} 
+      to {transform: scale(1)}
+    }
+
+    /* Change styles for span and cancel button on extra small screens */
+    @media screen and (max-width: 300px) {
+    .psw {
+        display: block;
+        float: none;
+        color: black;
+      }
+      .cancelbtn {
+        width: 100%;
+      }
+    }
+    /*MODAL END*/
+
+    </style>
+  </head>
+<body>
+
+<?php
+include_once('header.html');
+?>
+
+<div class="navbar">
+  <a href="index.php"><image src="images/home/home.jpg" class="navimage" ></image></a>
+  <div class="dropdown">
+    <button class="dropbutton">Donation</button>
+    <div class="dropdown-content">
+      <a href="donate-food.php">Food</a>
+      <a href="money-donation.php">Money</a>
+    </div>
+  </div> 
+  <div class="dropdown">
+    <button class="dropbutton">Registration</button>
+    <div class="dropdown-content">
+      <a href="registration-volunteer.php">Volunteer</a>
+      <a href="registration-ngo.php">NGO</a>
+      <a href="registration-hotel.php">Hotel</a>
+    </div>
+  </div>   
+  <a href="provide-info.html">Provide Info</a>
+  <div class="navbar-right"> 
+    <a onclick="document.getElementById('id01').style.display='block'"><image src="images/home/avatar.jpg" class="navimage"></a>
+  </div>
+</div>
+
+<div class="row">
+  <div class="leftcolumn">
+    <div class="card1">
+      <div class="cf3">
+        <image class="bottom" src="images/home/pic2.jpg" ></image>
+        <image class="top" src="images/home/pic1.jpg" ></image>
+      </div>
+    </div>
+    <div class="card">
+      <h2 align= center>THE NO HUNGER PROJECT</h2>
+      <h3 align=right >Start Date, Jan 11, 2021</h3>
+      <img src="images/home/logo.jpg" class="cimage"></img>
+      <p><h3>The aim behind this project is :</h3></p>
+      
+      <h4>1.To reduce the food wasted in our country.</h4>
+      <h4>2.Provide food to as many as needy people as possible</h4>
+      <h4>3.To create a non-profitabe organisation that works for the betterment of society</h4>
+    </div>
+  </div>
+  <div class="rightcolumn">
+    <div class="card">
+      <h2>Team</h2>
+      <image src="images/home/ourlogo.png" class="cimage2"></image>
+      <p>This project was started by the group of HADS coders.</p>
+    </div>
+    <div class="card">
+      <h3>NGO's working with us</h3>
+      <p><a class="button1" href="">1.NGO</a></p>
+      <p><a class="button1" href="">2.NGO</a></p>
+      <p><a class="button1" href="">3.NGO</a></p>
+    </div>
+    <div class="card">
+      <h3>Food donated till now</h3>
+      <p>3000 packets</p>
+      <h3>Estimated Consumers remaining</h3>
+      <p>3000 people</p>
+      <h3>Volunteers on work</h3>
+      <p>3000 volunteers</p>
+      <a href="#" class="button">More Info</a>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <h2 clhass="footer-title">OUR TEAM</h2>
+  <div class="footer-grid">
+    <div class="member-box">
+      <image class="img" src="images/footer/coder1.jpeg"></image>
+      <p>
+        <h class="txt">SUFYAN DAWNAK</h>
+      </p>
+    </div>
+    <div class="member-box">
+      <image class="img" src="images/footer/coder2.jpeg"></image>
+      <p>
+        <h class="txt">DANIYAL DOLARE</h>
+      </p>
+    </div>
+    <div class="member-box">
+      <image class="img" src="images/footer/coder3.jpeg"></image>
+      <p>
+        <h class="txt">HAARISH KHAN</h>
+      </p>
+    </div>
+    <div class="member-box">
+      <image class="img" src="images/footer/coder4.jpeg"></image>
+      <p>
+        <h class="txt">AZAD ANSARI</h>
+      </p>
+    </div>
+  </div>
+</div>
+
+<!--MODAL-->
+
+<div id="id01" class="modal1">
+  <div class="modal1-dailog">
+  <form class="modal1-content animate" method="POST">
+    <div class="imgcontainer">
+      <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+      <a href="login.php" >
+        <img src="images/modal/volunteer.jpg"  class="avatar1"></a>
+      <a href="hotellogin.php">  
+      <img src="images/modal/hotel.jpg" alt="Avatar" class="avatar2"></a>
+      <a href="ngologin.php">
+      <img src="images/modal/ngo.png" alt="Avatar" class="avatar3"></a>
+      <h1 class="mtxt">CHOOSE YOUR LOGIN TYPE</h1>
+    </div>
+    </div>
+  </form>
+  </div>
+</div>
+
+
+<!--MODAL END-->
+
+</body>
 </html>
